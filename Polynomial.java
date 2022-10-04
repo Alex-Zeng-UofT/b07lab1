@@ -59,11 +59,15 @@ public class Polynomial {
 	public double[] set_coef(String[] terms) {
 		double arr[]=new double[terms.length];
 		for(int i=0;i<terms.length;i++) {
-			String cur=terms[i].split("x")[0];
-			if(cur.equals(""))
+			if(terms[i].equals("x"))
 				arr[i]=1;
-			else
-				arr[i]=Double.parseDouble(terms[i].split("x")[0]);
+			else {
+				String cur=terms[i].split("x")[0];
+				if(cur.equals("-"))
+					arr[i]=-1;
+				else
+					arr[i]=Double.parseDouble(cur);
+				}
 		}
 		return arr;
 	}
@@ -76,6 +80,8 @@ public class Polynomial {
 			else if(terms[i].split("x").length==1) {
 				arr[i]=1;
 			}
+			else if((terms[i].equals("x")))
+				arr[i]=1;
 			else
 				arr[i]=Integer.parseInt(terms[i].split("x")[1]);
 		}
@@ -247,4 +253,18 @@ public class Polynomial {
 	public boolean hasRoot(double input){
 		return evaluate(input)==0;
 	}
+	
+	public void Polyprint() {
+		System.out.println("COEFFICIENTS");
+		for (double i:coefficients) {
+			System.out.println(i);
+		}
+		System.out.println("EXPONENTS");
+		for (int i:exponents) {
+			System.out.println(i);
+		}
+		
+		System.out.println("");
+	}
 }
+
